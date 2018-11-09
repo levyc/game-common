@@ -13,7 +13,7 @@ public class Event<S,D> {
 	/**事件数据*/
 	private D data;
 	/**事件间异步执行*/
-	private boolean asynchronous;
+	private boolean asynchronous = false;
 	
 	public Event(int type,S source,D data){
 		this.type = type;

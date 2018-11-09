@@ -11,19 +11,19 @@ import java.util.Arrays;
 public class EventSubscriber {
 	
 	/**处理方法对应的实例*/
-	private Object exector;
+	private Object target;
 	/**事件处理器*/
 	private Method eventHandlemethod;
 	
 	public EventSubscriber(Object exector, Method eventHandlemethod) {
 		super();
-		this.exector = exector;
+		this.target = exector;
 		this.eventHandlemethod = eventHandlemethod;
 	}
 
 	public Object doInvoke(Object...args) throws Exception{
 		try {
-			return eventHandlemethod.invoke(exector, args);
+			return eventHandlemethod.invoke(target, args);
 		} catch (IllegalAccessException e) {
 			throw new Exception("cannot access method invoke ");
 		} catch (IllegalArgumentException e) {
@@ -32,6 +32,16 @@ public class EventSubscriber {
 			throw new Exception("InvocationTarget error");
 		}
 	}
+
+	public Object getTarget() {
+		return target;
+	}
+
+	public Method getEventHandlemethod() {
+		return eventHandlemethod;
+	}
+	
+	
 	
 	
 }
