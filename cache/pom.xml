@@ -2,19 +2,22 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  
   <parent>
     <groupId>com.snower</groupId>
     <artifactId>common</artifactId>
     <version>1.0</version>
   </parent>
-  <groupId>com.snower</groupId>
-  <artifactId>net</artifactId>
-  <version>1.0</version>
-  <name>net</name>
+ 
+  <artifactId>cache</artifactId>
+  <name>cache</name>
+  <description>内存缓存</description>
   <url>http://maven.apache.org</url>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -23,4 +26,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
 </project>

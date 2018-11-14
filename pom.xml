@@ -17,6 +17,8 @@
     <module>net</module>
     <module>messageDispatcher</module>
     <module>utils</module>
+    <module>cache</module>
+    <module>ramcache</module>
   </modules>
   
   <dependencies>

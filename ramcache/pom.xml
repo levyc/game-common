@@ -8,9 +8,9 @@
     <version>1.0</version>
   </parent>
   <groupId>com.snower</groupId>
-  <artifactId>net</artifactId>
+  <artifactId>ramcache</artifactId>
   <version>1.0</version>
-  <name>net</name>
+  <name>ramcache</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
