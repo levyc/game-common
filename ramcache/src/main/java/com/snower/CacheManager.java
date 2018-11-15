@@ -8,7 +8,4 @@ public class CacheManager {
 	
 	private ConcurrentHashMap<String,ICacheProvider> caches = new ConcurrentHashMap<String,ICacheProvider>();
 	
-	public void addCache(String key,ICacheProvider< , V>){
-		
-	}
 }
