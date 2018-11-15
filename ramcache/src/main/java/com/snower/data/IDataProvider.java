@@ -6,7 +6,7 @@ package com.snower.data;
  * @param <K>
  * @param <V>
  */
-public interface DataProvider<K,V> {
+public interface IDataProvider<K,V> {
 	
 	V load(K key);
 	

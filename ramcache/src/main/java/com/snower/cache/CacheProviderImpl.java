@@ -2,19 +2,19 @@ package com.snower.cache;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class CacheProviderImpl<K, V> implements ICacheProvider<K, V> {
+public class CacheProviderImpl<K> implements ICacheProvider<K> {
 
-	private ConcurrentHashMap<K, V> cache;
+	private ConcurrentHashMap<K,CacheEntry> cache;
 	
-	public V get(K key) {
+	public CacheEntry get(K key) {
 		return cache.get(key);
 	}
 
-	public void put(K k, V value) {
+	public void put(K k, CacheEntry value) {
 		cache.put(k, value);
 	}
 
-	public V remove(K key) {
+	public CacheEntry remove(K key) {
 		return cache.remove(key);
 	}
 

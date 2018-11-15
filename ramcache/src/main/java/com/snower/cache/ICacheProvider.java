@@ -4,13 +4,13 @@ package com.snower.cache;
  * @author levy
  *
  */
-public interface ICacheProvider<K,V> {
+public interface ICacheProvider<K> {
 	
-	V get(K key);
+	CacheEntry get(K key);
 	
-	void put(K k,V v);
+	void put(K k,CacheEntry entry);
 	
-	V remove(K k);
+	CacheEntry remove(K k);
 	
 	void clear();
 	
