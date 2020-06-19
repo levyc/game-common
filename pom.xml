@@ -18,7 +18,6 @@
     <module>messageDispatcher</module>
     <module>utils</module>
     <module>ramcache</module>
-    <module>ramcache</module>
   </modules>
   
   <dependencies>

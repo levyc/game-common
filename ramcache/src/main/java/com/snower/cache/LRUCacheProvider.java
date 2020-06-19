@@ -14,11 +14,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author levy
  */
-public class LRUCacheProvider<K, CacheEntry> implements ICacheProvider<K, CacheEntry> {
+public class LRUCacheProvider<K, V> implements ICacheProvider<K, V> {
 
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  private ConcurrentMap<K, CacheEntry> cache;
+  private ConcurrentMap<K, CacheEntry<K, V>> cache;
 
   /**
    * 最大容量
@@ -35,7 +35,7 @@ public class LRUCacheProvider<K, CacheEntry> implements ICacheProvider<K, CacheE
    */
   private int ttl;
 
-  private EvictionListener<K, CacheEntry> evictionListener;
+  private EvictionListener<K, CacheEntry<K, V>> evictionListener;
 
 
   public LRUCacheProvider(int maxSize, int initSize, int ttl) {
@@ -59,37 +59,47 @@ public class LRUCacheProvider<K, CacheEntry> implements ICacheProvider<K, CacheE
       }
     };
 
-    Cache<K, CacheEntry> cache = CacheBuilder.newBuilder().maximumSize(maxSize)
+    Cache<K, CacheEntry<K, V>> cache = CacheBuilder.newBuilder().maximumSize(maxSize)
         .initialCapacity(initSize)
         .expireAfterAccess(ttl,
+            TimeUnit.SECONDS).expireAfterWrite(ttl,
             TimeUnit.SECONDS).removalListener(removalListener).build();
     this.cache = cache.asMap();
   }
 
-  public CacheEntry get(K key) {
+
+  @Override
+  public CacheEntry<K, V> get(K key) {
     return cache.get(key);
   }
 
-  public CacheEntry put(K k, CacheEntry entry) {
-    return cache.put(k, entry);
+  @Override
+  public CacheEntry<K, V> put(K k, V v) {
+    return cache.put(k, new CacheEntry<K, V>(k, v));
   }
 
-  public CacheEntry putIfAbsent(K k, CacheEntry cacheEntry) {
-    return cache.putIfAbsent(k, cacheEntry);
+  @Override
+  public CacheEntry<K, V> putIfAbsent(K key, V v) {
+    return cache.putIfAbsent(key, new CacheEntry<K, V>(key, v));
   }
-
 
   public void remove(K key) {
     cache.remove(key);
   }
 
-  public void remove(K key, CacheEntry entry) {
+  @Override
+  public void remove(K key, CacheEntry<K, V> entry) {
     cache.remove(key, entry);
   }
 
 
   public void clear() {
     cache.clear();
+  }
+
+  @Override
+  public int size() {
+    return cache.size();
   }
 
 }

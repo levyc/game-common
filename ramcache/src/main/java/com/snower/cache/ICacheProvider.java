@@ -10,17 +10,17 @@ public interface ICacheProvider<K,V> {
   /**
    * 获取缓存
    */
-  V get(K key);
+  CacheEntry<K,V> get(K key);
 
   /**
    * 放入缓存
    */
-  V put(K k, V v);
+  CacheEntry<K,V> put(K k, V v);
 
   /**
    * 放入缓存
    */
-  V putIfAbsent(K k, V v);
+  CacheEntry<K,V> putIfAbsent(K k, V v);
 
   /**
    * 删除缓存
@@ -30,12 +30,18 @@ public interface ICacheProvider<K,V> {
   /**
    * 删除缓存
    */
-  void remove(K k,V v);
+  void remove(K k,CacheEntry<K,V> cacheEntry);
 
 
   /**
    * 清空缓存
    */
   void clear();
+
+  /**
+   * 当前缓存大小
+   * @return
+   */
+  int size();
 
 }
