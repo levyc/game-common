@@ -1,28 +1,41 @@
 package com.snower.cache;
 
-public class CacheEntry {
-		
-	private Object key;
-	private Object value;
-	
-	public CacheEntry(Object key, Object value) {
-		super();
-		this.key = key;
-		this.value = value;
-	}
+/**
+ * 缓存元素体
+ */
+public class CacheEntry<K, V> {
 
-	public Object getKey() {
-		return key;
-	}
+  /**
+   * 键
+   */
+  private K key;
 
-	public Object getValue() {
-		return value;
-	}
+  /**
+   * 值
+   */
+  private V value;
+
+  public CacheEntry(K key, V value) {
+    super();
+    this.key = key;
+    this.value = value;
+  }
+
+  public K getKey() {
+    return key;
+  }
+
+  public V getValue() {
+    return value;
+  }
+
+  public void setKey(K key) {
+    this.key = key;
+  }
+
+  public void setValue(V value) {
+    this.value = value;
+  }
 
 
-	public void setValue(Object value) {
-		this.value = value;
-	}
-	
-	
 }

@@ -9,13 +9,13 @@ import com.snower.data.IDataProvider;
 public class CacheContainer<K,V> {
 	
 	private String name;
-	private ICacheProvider<K> cacheProvider;
+	private ICacheProvider<K,CacheEntry<K,V>> cacheProvider;
 	private IDataProvider<K, V> dataProvider;
 	private ConcurrentHashMap<K,ReentrantLock> key2Locks = new ConcurrentHashMap<K,ReentrantLock>();
 	private AtomicInteger loadCounter = new AtomicInteger(0);
 	private AtomicInteger hitCounter = new AtomicInteger(0);
 	
-	public CacheContainer(String name,ICacheProvider<K> cacheProvider, IDataProvider<K, V> dataProvider) {
+	public CacheContainer(String name,ICacheProvider<K,CacheEntry<K,V>> cacheProvider, IDataProvider<K, V> dataProvider) {
 		super();
 		this.name = name;
 		this.cacheProvider = cacheProvider;
