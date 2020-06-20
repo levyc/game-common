@@ -12,7 +12,7 @@ public interface IDataProvider<K,V> {
 	
 	void insert(K key,V value);
 	
-	void save(K key,V value);
+	void update(K key,V value);
 	
 	void delete(K key,V value);
 }

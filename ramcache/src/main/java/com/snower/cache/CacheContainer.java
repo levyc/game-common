@@ -1,16 +1,19 @@
 package com.snower.cache;
 
 import com.google.common.collect.Sets;
+import com.snower.data.IDataProvider;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
-
-import com.snower.data.IDataProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 緩存容器
  */
 public class CacheContainer<K, V> {
+
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
   private String name;
   private ICacheProvider<K, V> cacheProvider;
@@ -61,10 +64,6 @@ public class CacheContainer<K, V> {
       }
 
       V v = dataProvider.load(k);
-      if (v == null) {
-        cacheProvider.put(k, null);//防止缓存穿透
-        return null;
-      }
       cacheProvider.put(k, v);
       return v;
     } finally {
@@ -112,15 +111,18 @@ public class CacheContainer<K, V> {
         willRemove.remove(key);
       }
 
-      CacheEntry<K, V> cacheEntry = cacheProvider.get(key);
-      if (value != cacheEntry.getValue()) {
-        cacheEntry.setNew(false);
-        cacheEntry.setValue(value);
-      } else {
-        cacheProvider.put(key, value);
-        cacheEntry = cacheProvider.get(key);
+      CacheEntry<K, V> cacheEntry = cacheProvider.putIfAbsent(key, value);
+      if (cacheEntry != null) {
+        if (cacheEntry.getValue() != null) {
+          logger.error("[{}]模块重复插入实体,id:[{}]", name, key.toString());
+        } else {
+          cacheEntry.setValue(value);
+          cacheEntry.setNew(true);
+        }
+      }else{
         cacheEntry.setNew(true);
       }
+
       if (persistNow) {
         dataProvider.insert(key, value);
       } else {
@@ -134,7 +136,7 @@ public class CacheContainer<K, V> {
 
 
   /**
-   * 只更新缓存,等待定时持久化
+   * 即时更新
    */
   public void update(K key, V value) {
     if (key == null || value == null) {
@@ -145,7 +147,7 @@ public class CacheContainer<K, V> {
     try {
       CacheEntry entry = cacheProvider.get(key);
       if (entry == null || entry.getValue() == null) {
-        dataProvider.save(key, value);
+        dataProvider.update(key, value);
       }
 //      cacheProvider.put(key, new CacheEntry(key, value));
     } finally {
@@ -154,7 +156,7 @@ public class CacheContainer<K, V> {
   }
 
   /**
-   * 更新缓存后立即持久化
+   * 异步更新
    */
   public void updateNow(K key, V value) {
     if (key == null || value == null) {
