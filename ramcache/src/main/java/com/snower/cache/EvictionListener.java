@@ -10,8 +10,6 @@ public interface EvictionListener<K, V> {
 
   /**
    * 元素失效时处理
-   * @param k
-   * @param v
    */
   void onEviction(K k, V v);
 

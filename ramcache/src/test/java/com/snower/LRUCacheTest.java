@@ -11,7 +11,7 @@ public class LRUCacheTest {
 
   @Test
   public void testLRU() {
-    ICacheProvider<String, String> cache = new LRUCacheProvider<String, String>(2, 1, 5);
+    ICacheProvider<String, String> cache = new LRUCacheProvider<String, String>(2, 1);
     cache.put("1", "1");
     cache.put("2", "2");
     cache.put("3", "3");

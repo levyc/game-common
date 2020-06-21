@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.snower</groupId>
   <artifactId>common</artifactId>
@@ -7,11 +9,11 @@
   <packaging>pom</packaging>
   <name>游戏服务端基础模块</name>
   <description>游戏服务端基础模块</description>
-  
+
   <properties>
-  	<common-version>1.0</common-version>
+    <common-version>1.0</common-version>
   </properties>
-  
+
   <modules>
     <module>event</module>
     <module>net</module>
@@ -19,32 +21,31 @@
     <module>utils</module>
     <module>ramcache</module>
   </modules>
-  
+
   <dependencies>
-  	<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.21</version>
-		</dependency>	
-		
-	<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-	<dependency>
-	    <groupId>com.alibaba</groupId>
-	    <artifactId>fastjson</artifactId>
-	    <version>1.2.51</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/junit/junit -->
-	<dependency>
-	    <groupId>junit</groupId>
-	    <artifactId>junit</artifactId>
-	    <version>4.12</version>
-	    <scope>test</scope>
-	</dependency>
-	
-	
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.21</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.51</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+
   </dependencies>
-  
-  
-  
+
+
 </project>

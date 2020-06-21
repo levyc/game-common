@@ -1,54 +1,63 @@
 package com.snower.event;
+
 /**
  * 事件抽象
- * @author Levy
  *
+ * @author Levy
  */
-public class Event<S,D> {
-	
-	/**事件类型*/
-	private int type;
-	/**事件源*/
-	private S source;
-	/**事件数据*/
-	private D data;
-	/**事件间异步执行*/
-	private boolean asynchronous = false;
-	
-	public Event(int type,S source,D data){
-		this.type = type;
-		this.source = source;
-		this.data = data;
-	}
-	
-	
-	public Event(int type, S source) {
-		this(type, source, null);
-	}
+public class Event<S, D> {
+
+  /**
+   * 事件类型
+   */
+  private int type;
+  /**
+   * 事件源
+   */
+  private S source;
+  /**
+   * 事件数据
+   */
+  private D data;
+  /**
+   * 事件间异步执行
+   */
+  private boolean asynchronous = false;
+
+  public Event(int type, S source, D data) {
+    this.type = type;
+    this.source = source;
+    this.data = data;
+  }
 
 
-	public int getType() {
-		return type;
-	}
+  public Event(int type, S source) {
+    this(type, source, null);
+  }
 
 
-	public S getSource() {
-		return source;
-	}
+  public int getType() {
+    return type;
+  }
 
 
-	public D getData() {
-		return data;
-	}
+  public S getSource() {
+    return source;
+  }
 
 
-	public boolean isAsynchronous() {
-		return asynchronous;
-	}
+  public D getData() {
+    return data;
+  }
 
 
-	public void setAsynchronous(boolean asynchronous) {
-		this.asynchronous = asynchronous;
-	}
-	
+  public boolean isAsynchronous() {
+    return asynchronous;
+  }
+
+
+  public void setAsynchronous(boolean asynchronous) {
+    this.asynchronous = asynchronous;
+  }
+
 }

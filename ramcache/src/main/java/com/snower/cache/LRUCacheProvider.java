@@ -5,7 +5,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,18 +29,13 @@ public class LRUCacheProvider<K, V> implements ICacheProvider<K, V> {
    */
   private int initSize;
 
-  /**
-   * time to live (Second)
-   */
-  private int ttl;
 
   private EvictionListener<K, CacheEntry<K, V>> evictionListener;
 
 
-  public LRUCacheProvider(int maxSize, int initSize, int ttl) {
+  public LRUCacheProvider(int maxSize, int initSize) {
     this.maxSize = maxSize;
     this.initSize = initSize;
-    this.ttl = ttl;
 
     RemovalListener removalListener = new RemovalListener<K, CacheEntry>() {
       public void onRemoval(RemovalNotification<K, CacheEntry> notification) {
@@ -60,10 +54,7 @@ public class LRUCacheProvider<K, V> implements ICacheProvider<K, V> {
     };
 
     Cache<K, CacheEntry<K, V>> cache = CacheBuilder.newBuilder().maximumSize(maxSize)
-        .initialCapacity(initSize)
-        .expireAfterAccess(ttl,
-            TimeUnit.SECONDS).expireAfterWrite(ttl,
-            TimeUnit.SECONDS).removalListener(removalListener).build();
+        .initialCapacity(initSize).removalListener(removalListener).build();
     this.cache = cache.asMap();
   }
 
